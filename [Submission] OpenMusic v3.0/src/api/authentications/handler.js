@@ -9,7 +9,6 @@ class AuthenticationsHandler extends Handler {
 
     async postAuthenticationHandler(req, h) {
         this._validator.validatePostAuthenticationPayload(req.payload);
-        console.log('masuk');
         const { username, password } = req.payload;
         const id = await this._usersService.verifyUserCredential(
             username,

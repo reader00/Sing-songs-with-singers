@@ -15,6 +15,19 @@ const routes = (handler) => [
         },
     },
     {
+        method: 'POST',
+        path: '/upload/users/photo',
+        handler: handler.postUploadUsersPhotoProfile,
+        options: {
+            payload: {
+                allow: 'multipart/form-data',
+                multipart: true,
+                output: 'stream',
+                maxBytes: 1000 * 500, // 500kb
+            },
+        },
+    },
+    {
         method: 'GET',
         path: '/upload/{param*}',
         handler: {

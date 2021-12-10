@@ -12,7 +12,12 @@ class PlaylistsHandler extends Handler {
     }
 
     async postPlaylistSongHandler(req, h) {
-        const playlistId = this.getPlaylistId(req.params.playlist);
+        // const playlistId = this.getPlaylistId(req.params.playlist);
+        const { playlistId, any } = req.params;
+
+        if (any !== 'songs') {
+            throw new NotFoundError('Resource tidak ditemukan');
+        }
 
         this._validator.validatePlaylistSongPayload(req.payload);
 
@@ -30,7 +35,11 @@ class PlaylistsHandler extends Handler {
     }
 
     async getPlaylistSongsHandler(req) {
-        const playlistId = this.getPlaylistId(req.params.playlist);
+        const { playlistId, any } = req.params;
+
+        if (any !== 'songs') {
+            throw new NotFoundError('Resource tidak ditemukan');
+        }
         const { id: owner } = req.auth.credentials;
 
         const songs = await this._service.getPlaylistSongs(playlistId, owner);
@@ -43,7 +52,11 @@ class PlaylistsHandler extends Handler {
     }
 
     async deletePlaylistSongByIdHandler(req, h) {
-        const playlistId = this.getPlaylistId(req.params.playlist);
+        const { playlistId, any } = req.params;
+
+        if (any !== 'songs') {
+            throw new NotFoundError('Resource tidak ditemukan');
+        }
         const { id: owner } = req.auth.credentials;
         const { songId } = req.payload;
 

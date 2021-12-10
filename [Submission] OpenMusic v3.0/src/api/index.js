@@ -58,7 +58,7 @@ const playlistSongsService = new PlaylistSongsService(
     cacheService
 );
 const storageService = new StorageService(
-    path.resolve(__dirname, '../uploads/file/pictures')
+    path.resolve(__dirname, './uploads/file/pictures')
 );
 
 module.exports = [
